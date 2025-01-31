@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <data>
+       <record id="ir_sequence_physician" model="ir.sequence">
+           <field name="name">Serial Numbers</field>
+           <field name="code">physician.data</field>
+           <field name="prefix">Ph</field>
+           <field name="padding">5</field>
+       </record>
+       <record id="ir_sequence_treatment" model="ir.sequence">
+            <field name="name">treatment serial number</field>
+            <field name="code">hospital.record</field>
+            <field name="prefix">CASE/%(year)s/</field>
+            <field name="padding">3</field>
+        </record>
+        <record id="ir_sequence_physician_speciality" model="ir.sequence">
+           <field name="name">Physician Speciality Serial Numbers</field>
+           <field name="code">physician.speciality</field>
+           <field name="prefix">PS</field>
+           <field name="padding">5</field>
+       </record>
+   </data>
+</odoo>

@@ -1,0 +1,12 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_data_patient,access_data,model_hospital_patient,base.group_user,1,1,1,0
+access_data_physician,access_data,model_hospital_physician,base.group_user,1,1,1,0
+access_data_treatment,access_data,model_hospital_treatment,base.group_user,1,1,0,0
+access_data_diseases,access_data,model_hospital_diseases,base.group_user,1,1,1,0
+access_data_diagnosis,access_data,model_hospital_diagnosis,base.group_user,1,1,1,0
+access_data_physician_speciality,access_data,model_hospital_speciality,base.group_user,1,1,1,0
+access_data_product_wizard,access_data,model_product_wizard,base.group_user,1,1,1,0
+
+access_data_admin,access_data_admin,model_hospital_treatment,Hospital1.user_admin,1,1,1,1
+access_treatment_nurse,access_treatment_nurse,model_hospital_treatment,Hospital1.user_nurse,1,1,0,0
+access_treatment_doctor,access_treatment_doctor,model_hospital_treatment,Hospital1.user_doctor,1,1,1,1

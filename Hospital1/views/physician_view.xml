@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Tree View Code -->
+<record id="physician_view_tree" model="ir.ui.view">
+    <field name="name">physicians.view.tree</field>
+    <field name="model">hospital.physician</field>
+    <field name="arch" type="xml">
+        <tree string="physician_dat">
+                <field name="physician_id" />
+                <field name="physician_specialty"/>
+                <field name="physician_name"/>
+                <field name="email"/>
+        </tree>
+    </field>
+</record>
+
+<!-- form view code --> 
+<record id="physician_view_form" model="ir.ui.view">
+    <field name="name">physicians.view.tree</field>
+    <field name="model">hospital.physician</field>
+    <field name="arch" type="xml">
+            <form string="physician">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="physician_id" invisible="1"/>
+                            <field name="physician_name"/>
+                            <field name="email"/>
+                        </group>
+                        <group>
+                            <field name="physician_specialty" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+    </field>
+</record>
+
+<!-- Action Code -->
+<record id="action_physician_form_hospital" model="ir.actions.act_window">
+    <field name="name">physician</field>
+    <field name="res_model">hospital.physician</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<record id="action_custom_partner_tree_view" model="ir.actions.act_window.view">
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="physician_view_tree"/>
+    <field name="act_window_id" ref="action_physician_form_hospital"/>
+</record>  
+<record id="action_custom_partner_form_view" model="ir.actions.act_window.view">
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="physician_view_form"/>
+    <field name="act_window_id" ref="action_physician_form_hospital"/>   
+</record> 
+
+</odoo>

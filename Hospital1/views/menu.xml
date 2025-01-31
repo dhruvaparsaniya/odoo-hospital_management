@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="root_menu"
+        name="Hospital"
+        sequence="1"
+        />
+
+    <menuitem id="patient_data"
+            name="Patient"
+            parent="root_menu"
+            action="action_patient_form_hospital"
+            groups="base.group_user"
+            sequence="10"/>
+            
+    <menuitem id="physician_data"
+            name="Physician"
+            parent="root_menu"
+            action="action_physician_form_hospital" 
+            groups="base.group_user"
+            sequence="11"/> 
+
+    <menuitem id="diseases"
+            name="Diseases"
+            parent="root_menu"
+            groups="base.group_user"
+            action="action_diseases_form_hospital"
+            sequence="12"/> 
+            
+    <menuitem id="treatment"
+            name="Treatment"
+            parent="root_menu"
+            groups="base.group_user"
+            action="action_treatment_form_hospital"
+            sequence="13"/>  
+
+    <menuitem id="diagnosis"
+            name="Diagnosis"
+            parent="root_menu"
+            groups="base.group_user"
+            action="action_diagnosis_form_hospital"
+            sequence="14"/>
+
+    <menuitem id="physician_speciality"
+            name="Physician Speciality"
+            parent="root_menu"
+            groups="base.group_user"
+            action="action_physician_speciality_form_hospital"
+            sequence="15"/>
+
+</odoo>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Form View Code -->
+<record id="treatment_view_form" model="ir.ui.view">
+    <field name="name">treatment.view.form</field>
+    <field name="model">hospital.treatment</field>
+    <field name="arch" type="xml">
+        <form string="treatment form">
+            <header>
+                <field name="state" widget="statusbar" statusbar_visible="draft,activate,done,cancel"/>
+                <button name="action_draft" string="Draft" state="draft" type="object" invisible="state not in ['cancel','done']" />
+                <button name="action_activate" string="Activate" state="activate" type="object" invisible="state not in ['draft']"/>
+                <button name="action_done" string="Done" state="done" type="object" invisible="state not in ['activate']"/>
+                <button name="action_cancel" string="Cancel" state="cancel" type="object" invisible="state not in ['draft','activate']" groups="Hospital1.user_admin" />
+
+                <button name="action_open_product_wizard" type="object" string="View Products" class="btn-primary" invisible="state not in ['activate']"/>
+            </header>
+            <sheet>
+             <div name="button_box" class="oe_button_box">
+                <button string="smart button" class="oe_stat_button" type="object" name="action_get_sales_record" icon="fa-calendar">
+                    <div class="o_field_widget o_stat_info">
+                        <field string="Sales" name="sales_count" widget="statinfo" class="oe_inline"/>
+                    </div>
+                </button>
+            </div>
+                <group>
+                    <group>
+                        <field name="treatment_id" invisible="1"/>
+                        <field name="physician_id"/>   
+                        <field name="patient_id"/>            
+                    </group>
+                    <group>
+                        <field name="treatment_date"/>
+                    </group>
+                    <field name="diagnosis"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<!-- Tree View Code -->
+<record id="treatment_view_tree" model="ir.ui.view">
+    <field name="name">treatment.view.tree</field>
+    <field name="model">hospital.treatment</field>
+        <field name="arch" type="xml">
+        <tree string="physician_dat">
+                <field name="treatment_id"/>
+                <field name="physician_id"/>
+                <field name="patient_id"/>
+                <field name="treatment_date"/>
+                <field name="diagnosis"/>
+        </tree>
+    </field>
+</record>
+
+<!-- Action Code -->
+<record id="action_treatment_form_hospital" model="ir.actions.act_window">
+    <field name="name">treatment</field>
+    <field name="res_model">hospital.treatment</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<record id="action_custom_partner_tree_view" model="ir.actions.act_window.view">
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="treatment_view_tree"/>
+    <field name="act_window_id" ref="action_treatment_form_hospital"/>
+</record> 
+
+<record id="action_custom_partner_form_view" model="ir.actions.act_window.view">
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="treatment_view_form"/>
+    <field name="act_window_id" ref="action_treatment_form_hospital"/>
+</record> 
+ 
+</odoo>

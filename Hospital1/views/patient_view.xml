@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- form View code -->
+<record id="patient_view_form" model="ir.ui.view">
+    <field name="name">patient.view.form</field>
+    <field name="model">hospital.patient</field>
+    <field name="arch" type="xml">
+        <form string="patient">
+        <sheet>
+            <div name="button_box" class="oe_button_box">
+                <button string="smart button" class="oe_stat_button" type="object" name="action_get_treatment_record" icon="fa-calendar">
+                    <div class="o_field_widget o_stat_info">
+                        <field string="Treatment" name="treatment_count" widget="statinfo" class="oe_inline"/>
+                    </div>
+                </button>
+            </div>
+            <group>
+                    <group>
+                        <field name="patient_name"/>
+                        <field name="email"/> 
+                        <field name="date_of_birth"/>
+                        <field name="patient_age" invisible='1'/> 
+                    </group>
+                    <group>
+                        <field name="gender"/>
+                        <field name="mobile_number"/>
+                        <field name="gov_identity"/>
+                    </group>                    
+                    <field name='image' widget="image" class="o_field_widget o_field_image oe_avatar"/>
+            </group>
+        </sheet>
+        </form>
+    </field>
+</record>
+
+<!-- Kanban View code -->
+<record id="patient_view_kanban" model="ir.ui.view">
+        <field name="name">patient.view.kanban</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" sample="1" >
+                <field name="patient_name"/>
+                <field name="gender"/>
+                <field name="gov_identity"/> 
+                <field name="email"/>
+                <field name="image"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong>
+                                        <field name="patient_name"/>
+                                    </strong>
+                                </div>
+                            </div>
+                            <t t-if="record.gender.value">
+                                <hr class="mt8 mb8"/>
+                                <t t-esc="record.gender.value"/>
+                            </t>
+                            <t t-if="record.gov_identity.value">
+                                <hr class="mt8 mb8"/>
+                                <t t-esc="record.gov_identity.value"/>
+                            </t>
+                            <t t-if="record.email.value">
+                                <hr class="mt8 mb8"/>
+                                <t t-esc="record.email.value"/>
+                            </t>
+                             <t t-if="record.image.value">
+                                <hr class="mt8 mb8"/>
+                                <t t-esc="record.image.value"/>
+                            </t>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+<!-- Action Code -->
+<record id="action_patient_form_hospital" model="ir.actions.act_window">
+    <field name="name">patient</field>
+    <field name="res_model">hospital.patient</field>
+    <field name="view_mode">kanban,form</field>
+</record>
+
+<!-- Action ViewCode -->
+<record id="action_custom_patient_tree_view" model="ir.actions.act_window.view">
+    <field name="view_mode">kanban</field>
+    <field name="view_id" ref="patient_view_kanban"/>
+    <field name="act_window_id" ref="action_patient_form_hospital"/>
+</record>
+<record id="action_custom_patient_form_view" model="ir.actions.act_window.view">
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="patient_view_form"/>
+    <field name="act_window_id" ref="action_patient_form_hospital"/>
+</record>
+</odoo>
