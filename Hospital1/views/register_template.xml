@@ -5,7 +5,6 @@
         <div class="container">
         <br/>
            <form action="/create/patient" enctype="multipart/form-data" method="POST">
-<!--               <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>-->
                 <div>
                     <label for="patient_name">Your Name</label>
                     <input type="text" class="form-control" id="patient_name" name="patient_name"  />
@@ -28,7 +27,11 @@
                 </div>
                 <div>
                     <label for="patient_name">Gender</label>
-                    <input type="text" class="form-control" id="gender" name="gender"/>
+                    <!--                    <input type="text" class="form-control" id="gender" name="gender"/>-->
+                    <select style="width:300px" name="gender" class="advanced-select">
+                        <option value="AK">Alaska</option>
+                        <option value="HI">Hawaii</option>
+                    </select>
                 </div>
                  <div>
                       <label for="image">Upload Image</label>
