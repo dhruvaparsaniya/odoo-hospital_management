@@ -1,4 +1,6 @@
 import base64
+import pdb
+
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
 from datetime import date
@@ -67,12 +69,17 @@ class hospital_patient(models.Model):
             else:
                 rec.patient_age = "0"
 
+    def action_send_mail(self):
+        template = self.env.ref('Hospital1.email_template')
+        template.send_mail(self.id, force_send=True)
+
     @api.model
     def create(self,vals):
-        # pdb.set_trace()
         vals['name']=vals.get("patient_name")
         vals['login']=vals.get("email")
-        return super(hospital_patient, self).create(vals)
+        patient = super(hospital_patient, self).create(vals)
+        patient.action_send_mail()
+        return patient
 
     def action_get_treatment_record(self):
         # This will make sure we have one record, not multiple records.

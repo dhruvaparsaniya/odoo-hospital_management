@@ -29,8 +29,8 @@
                     <label for="patient_name">Gender</label>
                     <!--                    <input type="text" class="form-control" id="gender" name="gender"/>-->
                     <select style="width:300px" name="gender" class="advanced-select">
-                        <option value="AK">Alaska</option>
-                        <option value="HI">Hawaii</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
                     </select>
                 </div>
                  <div>

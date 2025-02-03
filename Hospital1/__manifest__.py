@@ -3,6 +3,7 @@
     "author":"Dhruva",
     "license":"LGPL-3",
     "data":[
+        "data/email_template.xml",
         "data/sequence_hospital.xml",
 
         'security/security.xml',
