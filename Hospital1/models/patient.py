@@ -72,8 +72,6 @@ class hospital_patient(models.Model):
         # pdb.set_trace()
         vals['name']=vals.get("patient_name")
         vals['login']=vals.get("email")
-        decoded_image=vals.get("image")
-        vals['image']=base64.b64decode(decoded_image).decode()
         return super(hospital_patient, self).create(vals)
 
     def action_get_treatment_record(self):

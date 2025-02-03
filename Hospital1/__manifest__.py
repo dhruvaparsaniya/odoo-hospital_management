@@ -10,7 +10,7 @@
 
         "wizard/product_wizard_view.xml",
 
-        "views/patient_registration_template.xml",
+        "views/register_template.xml",
         "views/custom_sale_view.xml",
         "views/physician_speciality_view.xml",
         "views/diagnosis_view.xml",
@@ -24,5 +24,6 @@
     ],
     "depends": [
         "sale",
+        "web"
     ],
 }
