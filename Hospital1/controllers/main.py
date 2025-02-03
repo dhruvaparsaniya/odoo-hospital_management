@@ -1,7 +1,8 @@
 import base64
 from odoo import http
 from odoo.http import request
-import pdb
+
+
 class Hospital(http.Controller):
 
     @http.route('/patient_webform',website = True ,auth='public' ,type="http")

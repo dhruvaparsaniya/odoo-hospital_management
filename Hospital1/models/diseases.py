@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import fields, models
 
 class hospital_dieases(models.Model):
     _name="hospital.diseases"

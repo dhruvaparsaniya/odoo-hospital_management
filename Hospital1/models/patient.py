@@ -1,6 +1,3 @@
-import base64
-import pdb
-
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
 from datetime import date

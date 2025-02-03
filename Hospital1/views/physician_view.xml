@@ -13,7 +13,6 @@
         </tree>
     </field>
 </record>
-
 <!-- form view code --> 
 <record id="physician_view_form" model="ir.ui.view">
     <field name="name">physicians.view.tree</field>

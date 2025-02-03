@@ -35,4 +35,3 @@ class hospital_physician(models.Model):
         vals['name']=vals.get("physician_name")
         vals['login']=vals.get("email")
         return super(hospital_physician, self).create(vals)
-    
