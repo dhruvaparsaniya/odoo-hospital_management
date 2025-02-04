@@ -96,4 +96,4 @@ class ResPartner(models.Model):
     def compute_treatment_count(self):
         for record in self:
             record.treatment_count = self.env['hospital.treatment'].search_count(
-                [('patient_id', '=', self.name)]) 
+                [('patient_id', '=', self.name)])

@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields
 from odoo.exceptions import UserError
 
 class hospital_treatment_wizard(models.TransientModel):
