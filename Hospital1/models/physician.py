@@ -20,12 +20,12 @@ class hospital_physician(models.Model):
     def validate_constrains(self):
         pattern_name=r'[a-zA-Z ]{2,}'
         validate_name=re.match(pattern_name,self.physician_name)
-        if validate_name == None:
+        if not validate_name:
             raise ValidationError("Invalid name...please enter correct Name(name should not cotain any number).")
 
         pattern=r'^[a-z0-9-._]*@[a-z0-9-]*(\.[a-z]{2,4})$'
         validate=re.match(pattern,self.email)
-        if validate == None:
+        if not validate:
             raise ValidationError("Invalid email...please enter correct email.(formate:_____@__.__)")
 
     @api.model
