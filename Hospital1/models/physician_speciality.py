@@ -10,5 +10,5 @@ class hospital_physician_speciality(models.Model):
     @api.model
     def create(self, vals):
         vals['physician_speciality_id'] = self.env['ir.sequence'].sudo().next_by_code("physician.speciality") or 'New'
-        res = super(hospital_physician_speciality,self).create(vals)
+        res = super(hospital_physician_speciality, self).create(vals)
         return res

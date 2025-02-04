@@ -5,13 +5,12 @@ from odoo.http import request
 class Hospital(http.Controller):
 
     @http.route('/patient_webform', website=True, auth='public', type="http")
-    def patient_register(self,**kwarg):
-        return request.render("Hospital1.create_patient",{})
+    def patient_register(self, **kwarg):
+        return request.render("Hospital1.create_patient", {})
 
     @http.route('/create/patient', website=True, type='http', csrf=False)
-    def create_patient(self,**kwarg):
+    def create_patient(self, **kwarg):
         files = request.httprequest.files.getlist('image')
-        print("----------------------------------------------------",files)
         for file in files:
             attachment = file.read()
             if attachment:

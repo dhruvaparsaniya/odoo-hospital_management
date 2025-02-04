@@ -70,7 +70,7 @@ class hospital_patient(models.Model):
         template.send_mail(self.id, force_send=True)
 
     @api.model
-    def create(self,vals):
+    def create(self, vals):
         vals['name'] = vals.get("patient_name")
         vals['login'] = vals.get("email")
         patient = super(hospital_patient, self).create(vals)
@@ -91,7 +91,7 @@ class hospital_patient(models.Model):
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
-    treatment_count = fields.Integer(string="Treatment",compute='compute_treatment_count',default=0)
+    treatment_count = fields.Integer(string="Treatment", compute='compute_treatment_count', default=0)
     
     def compute_treatment_count(self):
         for record in self:
