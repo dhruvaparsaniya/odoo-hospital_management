@@ -16,7 +16,7 @@
         "views/physician_speciality_view.xml",
         "views/diagnosis_view.xml",
         "views/diseases_view.xml",
-        "views/treatment_view.xml",       
+        "views/treatment_view.xml",
         "views/patient_view.xml",
         "views/physician_view.xml",
 

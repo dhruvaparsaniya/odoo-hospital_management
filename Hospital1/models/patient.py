@@ -18,7 +18,7 @@ class hospital_patient(models.Model):
     gov_identity = fields.Char("Gov. ID Number")
     gender = fields.Selection([("male", "Male"), ("female", "Female")])
     patient_age = fields.Char("Age", compute="_compute_age", store=True)
-    image=fields.Binary()
+    image = fields.Binary()
 
     _sql_constraints = [
         ("unique_id", "unique(gov_identity)", "A patient with the same Gov. Identity already exists.")

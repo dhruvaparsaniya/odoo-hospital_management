@@ -33,7 +33,7 @@ class hospital_treatment_wizard(models.TransientModel):
 
         partner_id = self.treatment_ids.patient_id.partner_id.id
         order_lines = [
-            (0, 0, {"product_id": product.id, "product_uom_qty": 1 })
+            (0, 0, {"product_id": product.id, "product_uom_qty": 1})
             for product in self.product_ids
         ]
         sale_order = self.env["sale.order"].create(
