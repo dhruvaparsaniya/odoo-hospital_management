@@ -4,8 +4,7 @@ from odoo.http import request
 
 class Hospital(http.Controller):
 
-
-    @http.route('/patient_webform',website = True ,auth='public' ,type="http")
+    @http.route('/patient_webform', website=True, auth='public', type="http")
     def patient_register(self,**kwarg):
         return request.render("Hospital1.create_patient",{})
 
