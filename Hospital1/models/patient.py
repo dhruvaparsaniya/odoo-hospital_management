@@ -11,8 +11,8 @@ class hospital_patient(models.Model):
     usuario_id = fields.Many2one(
         "res.users", required=True, ondelete="restrict", auto_join=True
     )
-    patient_name=fields.Char('Name', required=True)
-    email=fields.Char('Email',required=True)
+    patient_name = fields.Char('Name', required=True)
+    email = fields.Char('Email', required=True)
     date_of_birth = fields.Date("Date of Birth")
     mobile_number = fields.Char("Mobile no.")
     gov_identity = fields.Char("Gov. ID Number")
@@ -71,8 +71,8 @@ class hospital_patient(models.Model):
 
     @api.model
     def create(self,vals):
-        vals['name']=vals.get("patient_name")
-        vals['login']=vals.get("email")
+        vals['name'] = vals.get("patient_name")
+        vals['login'] = vals.get("email")
         patient = super(hospital_patient, self).create(vals)
         patient.action_send_mail()
         return patient

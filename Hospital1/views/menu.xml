@@ -45,5 +45,4 @@
             groups="base.group_user"
             action="action_physician_speciality_form_hospital"
             sequence="15"/>
-
 </odoo>

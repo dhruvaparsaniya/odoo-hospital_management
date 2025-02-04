@@ -8,14 +8,14 @@ class hospital_treatment(models.Model):
 
     treatment_id = fields.Char("Treatment ID", default="id", readonly=True)
     diagnosis = fields.One2many("hospital.diagnosis", "treatment_id", string = "Diagnosis")
-    patient_id = fields.Many2one("hospital.patient", string = "Patient Name", required=True)
-    physician_id = fields.Many2one("hospital.physician", string = "Physician Name", required=True)
+    patient_id = fields.Many2one("hospital.patient", string="Patient Name", required=True)
+    physician_id = fields.Many2one("hospital.physician", string="Physician Name", required=True)
     treatment_date = fields.Date("Treatment Date", required=True)
     state = fields.Selection(
         [("draft", "Draft"), ("activate", "Activate"), ("done", "Done"), ("cancel", "Cancel")],
         default="draft",
     )
-    sales_count = fields.Integer(string="Sales",compute='compute_sales_count',default=0)
+    sales_count = fields.Integer(string="Sales", compute='compute_sales_count', default=0)
 
     @api.constrains("treatment_date")
     def validate_constrains(self):
