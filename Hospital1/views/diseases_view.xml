@@ -19,7 +19,6 @@
             </form>
         </field>
     </record>
-
 <!-- Tree View Code -->
     <record id="diseases_view_tree" model="ir.ui.view">
         <field name="name">diseases.view.tree</field>
@@ -31,21 +30,18 @@
             </tree>
         </field>
     </record>
-
 <!-- Action Code -->
 <record id="action_diseases_form_hospital" model="ir.actions.act_window">
     <field name="name">diseases</field>
     <field name="res_model">hospital.diseases</field>
     <field name="view_mode">tree,form</field>
 </record>
-
 <!-- Action View Code -->
 <record id="action_hospital_tree_view" model="ir.actions.act_window.view">
     <field name="view_mode">tree</field>
     <field name="view_id" ref="diseases_view_tree"/>
     <field name="act_window_id" ref="action_diseases_form_hospital"/>
-</record> 
-
+</record>
 <record id="action_hospital_form_view" model="ir.actions.act_window.view">
     <field name="view_mode">form</field>
     <field name="view_id" ref="diseaes_view_form"/>

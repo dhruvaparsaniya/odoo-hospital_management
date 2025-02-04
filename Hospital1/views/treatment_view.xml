@@ -53,7 +53,6 @@
         </tree>
     </field>
 </record>
-
 <!-- Action Code -->
 <record id="action_treatment_form_hospital" model="ir.actions.act_window">
     <field name="name">treatment</field>
@@ -65,8 +64,7 @@
     <field name="view_mode">tree</field>
     <field name="view_id" ref="treatment_view_tree"/>
     <field name="act_window_id" ref="action_treatment_form_hospital"/>
-</record> 
-
+</record>
 <record id="action_custom_partner_form_view" model="ir.actions.act_window.view">
     <field name="view_mode">form</field>
     <field name="view_id" ref="treatment_view_form"/>

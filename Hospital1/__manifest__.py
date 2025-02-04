@@ -21,7 +21,6 @@
         "views/physician_view.xml",
 
         "views/menu.xml",
-
     ],
     "depends": [
         "sale",

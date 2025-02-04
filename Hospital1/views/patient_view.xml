@@ -33,7 +33,6 @@
         </form>
     </field>
 </record>
-
 <!-- Kanban View code -->
 <record id="patient_view_kanban" model="ir.ui.view">
         <field name="name">patient.view.kanban</field>
@@ -77,14 +76,12 @@
             </kanban>
         </field>
     </record>
-
 <!-- Action Code -->
 <record id="action_patient_form_hospital" model="ir.actions.act_window">
     <field name="name">patient</field>
     <field name="res_model">hospital.patient</field>
     <field name="view_mode">kanban,form</field>
 </record>
-
 <!-- Action ViewCode -->
 <record id="action_custom_patient_tree_view" model="ir.actions.act_window.view">
     <field name="view_mode">kanban</field>

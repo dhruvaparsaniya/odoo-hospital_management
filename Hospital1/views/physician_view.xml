@@ -34,7 +34,6 @@
             </form>
     </field>
 </record>
-
 <!-- Action Code -->
 <record id="action_physician_form_hospital" model="ir.actions.act_window">
     <field name="name">physician</field>
@@ -50,7 +49,6 @@
 <record id="action_custom_partner_form_view" model="ir.actions.act_window.view">
     <field name="view_mode">form</field>
     <field name="view_id" ref="physician_view_form"/>
-    <field name="act_window_id" ref="action_physician_form_hospital"/>   
-</record> 
-
+    <field name="act_window_id" ref="action_physician_form_hospital"/>
+</record>
 </odoo>

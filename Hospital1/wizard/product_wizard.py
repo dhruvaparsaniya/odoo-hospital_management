@@ -12,7 +12,6 @@ class hospital_treatment_wizard(models.TransientModel):
         default=lambda self: self.env.context.get("default_treatment_id") or False,
         readonly=True
     )
-
     product_ids = fields.Many2many("product.product", string="Products", required=True)
 
     def confirm_action(self):
@@ -33,12 +32,10 @@ class hospital_treatment_wizard(models.TransientModel):
             )
 
         partner_id = self.treatment_ids.patient_id.partner_id.id
-
         order_lines = [
             (0, 0, {"product_id": product.id, "product_uom_qty": 1 })
             for product in self.product_ids
         ]
-
         sale_order = self.env["sale.order"].create(
             {
                 "partner_id": partner_id,

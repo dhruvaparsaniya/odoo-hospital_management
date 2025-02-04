@@ -9,6 +9,8 @@
     <record id="user_admin" model="res.groups">
         <field name="name">User Admin</field>
     </record>
+
+
     <record id="user_physician" model="res.groups">
         <field name="name">User Physician</field>
     </record>

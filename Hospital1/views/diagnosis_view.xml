@@ -21,7 +21,6 @@
         </form>
     </field>
 </record>
-
 <!-- Tree View Code -->
 <record id="diagnosis_view_tree" model="ir.ui.view">
     <field name="name">diagnosis.view.tree</field>
@@ -34,14 +33,12 @@
         </tree>
     </field>
 </record>
-
 <!-- Action Code -->
 <record id="action_diagnosis_form_hospital" model="ir.actions.act_window">
     <field name="name">diagnosis</field>
     <field name="res_model">hospital.diagnosis</field>
     <field name="view_mode">tree,form</field>
 </record>
-
 <!-- Action View Code -->
 <record id="action_custom_partner_tree_view" model="ir.actions.act_window.view">
     <field name="view_mode">tree</field>

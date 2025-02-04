@@ -11,7 +11,6 @@ class hospital_physician(models.Model):
     usuario_id = fields.Many2one(
         "res.users", required=True, ondelete="restrict", auto_join=True
     )
-
     physician_id = fields.Char("physician id",default='new',readonly=True)
     physician_name=fields.Char("Name",required=True)
     email=fields.Char("Email",required=True)
