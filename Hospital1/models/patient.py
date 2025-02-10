@@ -3,6 +3,8 @@ from odoo import api, fields, models
 from datetime import date
 from odoo.exceptions import ValidationError
 import re
+
+
 class hospital_patient(models.Model):
     _name = "hospital.patient"
     _description = "Patient Data"
@@ -19,6 +21,12 @@ class hospital_patient(models.Model):
     gender = fields.Selection([("male", "Male"), ("female", "Female")])
     patient_age = fields.Char("Age", compute="_compute_age", store=True)
     image = fields.Binary()
+    state = fields.Selection(
+        [("activate", "Activate"), ("inactivate", "Inactive")],
+        default="activate",
+    )
+    cancle_uid = fields.Many2one('res.users', 'Current User', default=lambda self: self.env.user, readonly=True)
+    cancellation_date = fields.Date('Date', required=True, readonly=True, default=lambda *a: date.today())
 
     _sql_constraints = [
         ("unique_id", "unique(gov_identity)", "A patient with the same Gov. Identity already exists.")
@@ -87,7 +95,7 @@ class hospital_patient(models.Model):
             'res_model': 'hospital.treatment',
             'domain': [('patient_id', '=', self.patient_name)],
             'context': "{'create': False}"
-        } 
+        }
 
 class ResPartner(models.Model):
     _inherit = "res.partner"

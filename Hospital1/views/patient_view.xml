@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <form string="patient">
                 <sheet>
+                    <field name="state" widget="statusbar" statusbar_visible="activate,inactivate"/>
                     <div name="button_box" class="oe_button_box">
                         <button string="smart button" class="oe_stat_button" type="object"
                                 name="action_get_treatment_record" icon="fa-calendar">
@@ -15,7 +16,6 @@
                             </div>
                         </button>
                     </div>
-                    <button name="action_send_mail" string="mail" type="object"/>
                     <group>
                         <group>
                             <field name="patient_name"/>

@@ -27,20 +27,21 @@
                 </div>
                 <div>
                     <label for="patient_name">Gender</label>
-                    <!--                    <input type="text" class="form-control" id="gender" name="gender"/>-->
-                    <select style="width:300px" name="gender" class="advanced-select">
+                    <select name="gender" class="form-control">
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
                 </div>
                  <div>
                       <label for="image">Upload Image</label>
-                      <input type="file" name="image" multiple="true"/>
+                     <input type="file" class="form-control" name="image" multiple="true"/>
                 </div>
                 <br/>
                 <div>
                 <button type="submit" class="btn btn-primary pull-left">Create Patient</button>
                 </div>
+               <br/>
+               <br/>
            </form>
         </div>
         </t>

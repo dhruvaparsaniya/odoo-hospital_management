@@ -5,3 +5,4 @@ from . import diagnosis
 from . import treatment
 from . import physician_speciality
 from . import custom_sale
+from . import custom_invoice

@@ -1,6 +1,7 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
+
 class hospital_treatment(models.Model):
     _name = "hospital.treatment"
     _description = "Treatment"
@@ -72,3 +73,6 @@ class hospital_treatment(models.Model):
         for record in self:
             record.sales_count = self.env['sale.order'].search_count(
                 [('treatment_id', '=', self.treatment_id)])
+
+    def action_print_custom_report(self):
+        return self.env.ref("Hospital1.action_report_treatment").report_action(self)

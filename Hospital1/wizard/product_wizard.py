@@ -1,6 +1,7 @@
 from odoo import models, fields
 from odoo.exceptions import UserError
 
+
 class hospital_treatment_wizard(models.TransientModel):
     _name = "product.wizard"
     _description = "product wizard"

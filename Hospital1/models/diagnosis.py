@@ -1,6 +1,7 @@
 from datetime import date
 from odoo import fields, models
 
+
 class hospital_diagnosis(models.Model):
     _name = "hospital.diagnosis"
     _description = "diagnosis data"

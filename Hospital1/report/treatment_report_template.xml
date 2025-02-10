@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_treatment">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page" style="padding: 20px;">
+                        <div class="oe_structure"/>
+
+                        <h2 style="text-align: center; margin-bottom: 20px;">Treatment Id:
+                            <t t-esc="o['treatment_id']"/>
+                        </h2>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <td>
+                                            <strong>Patient Name:</strong>
+                                        </td>
+                                        <td>
+                                            <span style="margin-left:5px" t-field="o.patient_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <br/>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="height: 10px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Age:</strong>
+                                        </td>
+                                        <td>
+                                            <span style="margin-left:5px" t-field="o.patient_id.patient_age"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <br/>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="height: 10px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Ph No:</strong>
+                                        </td>
+                                        <td>
+                                            <span style="margin-left:5px" t-field="o.patient_id.mobile_number"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div>
+                                <img t-if="not o.patient_id.image" t-att-src="'/web/static/src/img/placeholder.png'"
+                                     height="120" width="120" style="border: 1px solid #ccc; border-radius: 10px;"/>
+                                <img t-if="o.patient_id.image" t-att-src="image_data_uri(o.patient_id.image)"
+                                     style="max-width:150px; max-height:150px; border-radius:10px; border: 1px solid #ccc;"/>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 30px;">
+                            <table style="width: 100%; border: 1px solid black; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background-color: #f2f2f2;">
+                                        <th style="border: 1px solid black; padding: 10px; text-align: left;">
+                                            Physician
+                                        </th>
+                                        <th style="border: 1px solid black; padding: 10px; text-align: left;">Treatment
+                                            Date
+                                        </th>
+                                        <th style="border: 1px solid black; padding: 10px; text-align: left;">
+                                            Diagnosis
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px solid black; padding: 10px;">
+                                            <span t-field="o.physician_id"/>
+                                        </td>
+                                        <td style="border: 1px solid black; padding: 10px;">
+                                            <span t-field="o.treatment_date"/>
+                                        </td>
+                                        <td style="border: 1px solid black; padding: 10px;">
+                                            <t t-if="o.diagnosis">
+                                                <table style="width: 100%; border-collapse: collapse;">
+                                                    <thead>
+                                                        <tr style="background-color: #f9f9f9;">
+                                                            <th style="border-bottom: 1px solid black; padding: 5px; text-align: left;">
+                                                                Diseases
+                                                            </th>
+                                                            <th style="border-bottom: 1px solid black; padding: 5px; text-align: left;">
+                                                                Type
+                                                            </th>
+                                                            <th style="border-bottom: 1px solid black; padding: 5px; text-align: left;">
+                                                                Diagnosis Date
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <t t-foreach="o.diagnosis" t-as="d">
+                                                            <tr>
+                                                                <td style="border-bottom: 1px solid #ddd; padding: 5px;">
+                                                                    <span t-field="d.diseases"/>
+                                                                </td>
+                                                                <td style="border-bottom: 1px solid #ddd; padding: 5px;">
+                                                                    <span t-field="d.type"/>
+                                                                </td>
+                                                                <td style="border-bottom: 1px solid #ddd; padding: 5px;">
+                                                                    <span t-field="d.date"/>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </tbody>
+                                                </table>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

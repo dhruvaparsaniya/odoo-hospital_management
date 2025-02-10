@@ -19,6 +19,8 @@
 
                     <button name="action_open_product_wizard" type="object" string="View Products" class="btn-primary"
                             invisible="state not in ['activate']"/>
+                    <button string="Print Report" class="oe_stat_button" type="object"
+                            name="action_print_custom_report" icon="fa-calendar"/>
                 </header>
                 <sheet>
                     <div name="button_box" class="oe_button_box">

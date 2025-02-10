@@ -25,9 +25,11 @@
                             <field name="physician_id" invisible="1"/>
                             <field name="physician_name"/>
                             <field name="email"/>
+                            <field name="gender"/>
                         </group>
                         <group>
                             <field name="physician_specialty" widget="many2many_tags"/>
+                            <field name="mobile_number"/>
                         </group>
                     </group>
                 </sheet>
