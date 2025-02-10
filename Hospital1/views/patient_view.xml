@@ -44,7 +44,7 @@
                 <field name="gender"/>
                 <field name="gov_identity"/>
                 <field name="email"/>
-                <field name="image"/>
+                <field name="state"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div t-attf-class="oe_kanban_global_click">
@@ -67,9 +67,9 @@
                                 <hr class="mt8 mb8"/>
                                 <t t-esc="record.email.value"/>
                             </t>
-                            <t t-if="record.image.value">
+                            <t t-if="record.state.value">
                                 <hr class="mt8 mb8"/>
-                                <t t-esc="record.image.value"/>
+                                <t t-esc="record.state.value"/>
                             </t>
                         </div>
                     </t>
