@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <record id="email_template" model="mail.template">
-            <field name="name">EMAIL TEMPLATE NAME</field>
+            <field name="name">Registration Template</field>
             <field name="model_id" ref="Hospital1.model_hospital_patient"/>
             <field name="subject">Registration Information</field>
             <field name="email_from">dhruva281@gmail.com</field>
@@ -23,5 +23,102 @@
                 </div>
             </field>
         </record>
+
+        <record id="confirm_email_template" model="mail.template">
+            <field name="name">Confirm Template</field>
+            <field name="model_id" ref="Hospital1.model_hospital_treatment"/>
+            <field name="subject">Treatment Confirmation Information</field>
+            <field name="email_from">dhruva281@gmail.com</field>
+            <field name="email_to">{{ object.patient_id.email }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear<t t-out="object.patient_id.patient_name"/>,
+                        <br/>
+                        <br/>
+                        This is a confirmation of your treatment appointment with Dr.<t
+                            t-out="object.physician_id.name"/>.
+                        <br/>
+                        <br/>
+                        <strong>Treatment Details:</strong>
+                        <br/>
+                        <ul>
+                            <li>
+                                <strong>Patient Name:</strong>
+                                <t t-out="object.patient_id.patient_name"/>
+                            </li>
+                            <li>
+                                <strong>Physician:</strong>
+                                <t t-out="object.physician_id.physician_name"/>
+                            </li>
+                            <li>
+                                <strong>Treatment Date:</strong>
+                                <t t-out="object.treatment_date"/>
+                            </li>
+                        </ul>
+                        <br/>
+                        Please arrive on time for your appointment. If you have any questions, feel free to contact us.
+                        <br/>
+                        <br/>
+                        Best regards,
+                        <br/>
+                        Mitchell Admin
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <record id="done_email_template" model="mail.template">
+            <field name="name">Done Template</field>
+            <field name="model_id" ref="Hospital1.model_hospital_treatment"/>
+            <field name="subject">Treatment Successfully Completed</field>
+            <field name="email_from">dhruva281@gmail.com</field>
+            <field name="email_to">{{ object.patient_id.email }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear<t t-out="object.patient_id.patient_name"/>,
+                        <br/>
+                        <br/>
+                        We are pleased to inform you that your treatment with Dr.
+                        <t t-out="object.physician_id.name"/>
+                        has been successfully completed. Wishing you good health and a speedy recovery!
+                        <br/>
+                        <br/>
+                        Best regards,
+                        <br/>
+                        Mitchell Admin
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <record id="cancle_email_template" model="mail.template">
+            <field name="name">Cancle Template</field>
+            <field name="model_id" ref="Hospital1.model_hospital_treatment"/>
+            <field name="subject">Treatment Cancellation</field>
+            <field name="email_from">dhruva281@gmail.com</field>
+            <field name="email_to">{{ object.patient_id.email }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear<t t-out="object.patient_id.patient_name"/>,
+                        <br/>
+                        <br/>
+                        Your treatment
+                        <t t-out="object.treatment_id"/>
+                        with Dr.
+                        <t t-out="object.physician_id.name"/>
+                        has been canceled as per your request. Please contact us if you need any further assistance.
+                        <br/>
+                        <br/>
+                        Best regards,
+                        <br/>
+                        Mitchell Admin
+                    </p>
+                </div>
+            </field>
+        </record>
+
     </data>
 </odoo>

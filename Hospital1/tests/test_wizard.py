@@ -7,7 +7,6 @@ class TestWizard(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(TestWizard, cls).setUpClass()
-        # import pdb;pdb.set_trace()
         cls.treatment = cls.env['hospital.treatment'].create({
             'patient_id': 1,
             'physician_id': 2,

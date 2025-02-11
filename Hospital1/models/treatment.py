@@ -13,7 +13,7 @@ class hospital_treatment(models.Model):
     physician_id = fields.Many2one("hospital.physician", string="Physician Name", required=True)
     treatment_date = fields.Date("Treatment Date", required=True)
     state = fields.Selection(
-        [("draft", "Draft"), ("activate", "Activate"), ("done", "Done"), ("cancel", "Cancel")],
+        [("draft", "Draft"), ("confirm", "Confirm"), ("done", "Done"), ("cancel", "Cancel")],
         default="draft",
     )
     sales_count = fields.Integer(string="Sales", compute='compute_sales_count', default=0)
@@ -31,21 +31,28 @@ class hospital_treatment(models.Model):
         )
         return super(hospital_treatment, self).create(vals)
 
+    def action_send_mail(self, mail_type):
+        template = self.env.ref(mail_type)
+        template.send_mail(self.id, force_send=True)
+
     def action_draft(self):
         for rec in self:
             rec.state = "draft"
 
     def action_activate(self):
         for rec in self:
-            rec.state = "activate"
+            rec.state = "confirm"
+        self.action_send_mail('Hospital1.confirm_email_template')
 
     def action_done(self):
         for rec in self:
             rec.state = "done"
+        self.action_send_mail('Hospital1.done_email_template')
 
     def action_cancel(self):
         for rec in self:
             rec.state = "cancel"
+        self.action_send_mail('Hospital1.cancle_email_template')
 
     def action_open_product_wizard(self):
         return {

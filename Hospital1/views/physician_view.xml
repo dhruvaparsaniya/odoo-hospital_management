@@ -36,6 +36,18 @@
             </form>
         </field>
     </record>
+    <record id="physician_view_search" model="ir.ui.view">
+        <field name="name">physician.view.search</field>
+        <field name="model">hospital.physician</field>
+        <field name="arch" type="xml">
+            <search string="gender">
+                <filter string="male" name="male"
+                        domain="[('gender','=','male')]"/>
+                <filter string="female" name="female"
+                        domain="[('gender','=','female')]"/>
+            </search>
+        </field>
+    </record>
     <!-- Action Code -->
     <record id="action_physician_form_hospital" model="ir.actions.act_window">
         <field name="name">physician</field>

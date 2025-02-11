@@ -7,15 +7,15 @@
         <field name="arch" type="xml">
             <form string="treatment form">
                 <header>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,activate,done,cancel"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done,cancel"/>
                     <button name="action_draft" string="Draft" state="draft" type="object"
                             invisible="state not in ['cancel','done']"/>
-                    <button name="action_activate" string="Activate" state="activate" type="object"
+                    <button name="action_activate" string="Confirm" state="confirm" type="object"
                             invisible="state not in ['draft']"/>
                     <button name="action_done" string="Done" state="done" type="object"
-                            invisible="state not in ['activate']"/>
+                            invisible="state not in ['confirm']"/>
                     <button name="action_cancel" string="Cancel" state="cancel" type="object"
-                            invisible="state not in ['draft','activate']" groups="Hospital1.user_admin"/>
+                            invisible="state not in ['draft','confirm']" groups="Hospital1.user_admin"/>
 
                     <button name="action_open_product_wizard" type="object" string="View Products" class="btn-primary"
                             invisible="state not in ['activate']"/>
@@ -59,6 +59,18 @@
                 <field name="treatment_date"/>
                 <field name="diagnosis"/>
             </tree>
+        </field>
+    </record>
+
+    <record id="treatment_view_search" model="ir.ui.view">
+        <field name="name">treatment.view.search</field>
+        <field name="model">hospital.treatment</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="0" string="Group By">
+                    <filter string="State" name="group_by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
         </field>
     </record>
     <!-- Action Code -->

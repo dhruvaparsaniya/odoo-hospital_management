@@ -1,5 +1,7 @@
+import xmlrpc.client
+import requests
 from odoo import http
-from odoo.http import request, Response
+from odoo.http import request
 import re
 
 
@@ -13,11 +15,9 @@ def validate_fields(name, email, gender, user_type, mobile_no='0000000000', gov_
     if not re.match(pattern_email, email):
         return {"error": "Invalid email. Please enter a valid email address (format: example@domain.com)"}
 
-    # gender = gender.lower()
     if gender not in ["male", "female"]:
         return {"error": "Invalid gender. Gender can only be 'male' or 'female'."}
 
-    # user_type=user_type.lower()
     if user_type not in ["patient", "physician"]:
         return {"error": "Invalid user type. User type must be 'patient' or 'physician'."}
 
@@ -41,8 +41,10 @@ def get_user_data(name, email, gender, user_type):
     validated_data = validate_fields(name, email, gender, user_type)
     if validated_data == True:
         if user_type == "patient":
-            user = request.env['hospital.patient'].sudo().search(
-                [("name", "=", name), ("email", "=", email), ("gender", "=", gender)])
+            state = "active"
+            active_user = request.env['hospital.patient'].sudo().search([("state", "=", state)])
+            user = active_user.search(
+                [("name", "=", name), ("email", "=", email), ("gender", "=", gender), ])
             if not user:
                 return {"error": "User not found"}
             else:
@@ -95,12 +97,14 @@ def create_users(name, email, gender, mobile_no, gov_id, birthdate, physician_sp
                 "mobile_number": mobile_no,
                 "date_of_birth": birthdate,
                 "gov_identity": gov_id,
+                "state": "active",
                 'company_ids': [(4, company.id)],
                 'company_id': company.id,
             })
             return {"patient created successfully"}
         else:
             return validated_data
+
     elif user_type == "physician":
         validated_data = validate_fields(name=name, email=email, gender=gender, mobile_no=mobile_no,
                                          user_type=user_type, physician_speciality=physician_speciality)
@@ -126,10 +130,7 @@ def create_users(name, email, gender, mobile_no, gov_id, birthdate, physician_sp
 
 def update_user_data(user_id, name, email, gender, mobile_no, user_type, physician_speciality=""):
     validated_data = validate_fields(name=name, email=email, gender=gender, mobile_no=mobile_no, user_type=user_type)
-    pattern_id = r"^\d$"
-    if not re.match(pattern_id, user_id):
-        return {"error": "Invalid id. id should only contain number."}
-    else:
+    if True:
         if validated_data == True:
             if user_type == "patient":
                 user = request.env['hospital.patient'].sudo().browse(user_id)
@@ -163,7 +164,21 @@ def update_user_data(user_id, name, email, gender, mobile_no, user_type, physici
 
 class UserApi(http.Controller):
 
-    @http.route("/api/get_user", methods=["POST"], type="json", auth="none", csrf=False)
+    @http.route("/api/web/login", methods=["post"], type="json", auth="none")
+    def authenticate_user(self, db, login, password):
+        request.session.authenticate(db, login, password)
+        user = request.env.user
+        if not user:
+            return {"error": "Invalid credentials"}
+
+        return {
+            "user_id": user.id,
+            "user_name": user.name,
+            "session_id": request.session.session_token,
+            "message": "Login successful"
+        }
+
+    @http.route("/api/get_user", methods=["POST"], type="json", auth="user", csrf=False)
     def get_user(self, name, email, gender, user_type, **kwargs):
         user_type = user_type.lower()
         if not user_type:
@@ -176,7 +191,7 @@ class UserApi(http.Controller):
             return {"error": "Please enter gender"}
         return get_user_data(name, email, gender, user_type)
 
-    @http.route("/api/create_user", methods=["POST"], type="json", auth="none", csrf=False)
+    @http.route("/api/create_user", methods=["POST"], type="json", auth="user", csrf=False)
     def create_user(self, name, email, gender, mobile_no, user_type, gov_id='', birthdate='', physician_speciality="",
                     **kwargs):
         user_type = user_type.lower()
@@ -193,7 +208,7 @@ class UserApi(http.Controller):
             return {"error": "Please enter mobile number"}
         return create_users(name, email, gender, mobile_no, gov_id, birthdate, physician_speciality, user_type)
 
-    @http.route("/api/update_user", methods=["POST"], type="json", auth="none", csrf=False)
+    @http.route("/api/update_user", methods=["POST"], type="json", auth="user", csrf=False)
     def update_user(self, user_id, name, email, gender, mobile_no, user_type, physician_speciality="", **kwargs):
         user_type = user_type.lower()
         gender = gender.lower()
@@ -212,7 +227,24 @@ class UserApi(http.Controller):
 
         return update_user_data(user_id, name, email, gender, mobile_no, user_type, physician_speciality="")
 
-    @http.route("/api/change_state", methods=["POST"], type="json", auth="none", csrf=False)
+    @http.route("/api/change_state", methods=["POST"], type="json", auth="user", csrf=False)
     def change_state(self, user_id, **kwargs):
         user = request.env['hospital.patient'].sudo().browse(user_id)
         user.write({'state': 'inactivate'})
+
+    @http.route("/api/search_physician", methods=["POST"], type="json", auth="user", csrf=False)
+    def change_state(self, speciality, **kwargs):
+
+        if not speciality:
+            return {"error": "Speciality is required"}
+
+        external_api_url = "https://67a9dadb65ab088ea7e4bae2.mockapi.io/physiciandata"
+        response = requests.get(external_api_url)
+        if response.status_code != 200:
+            return {"error": "Failed to fetch data from external API"}
+
+        physicians = response.json()
+        filtered_doctors = [physician for physician in physicians if physician.get("speciality") == speciality]
+        response = {"message": f"This is a list of physicians with speciality {speciality}, please select from this:",
+                    "physicians": filtered_doctors}
+        return response

@@ -9,21 +9,23 @@ class hospital_patient(models.Model):
     _name = "hospital.patient"
     _description = "Patient Data"
     _inherits = {"res.users": "usuario_id"}
+    _inherit = 'mail.thread'
 
     usuario_id = fields.Many2one(
         "res.users", required=True, ondelete="restrict", auto_join=True
     )
-    patient_name = fields.Char('Name', required=True)
-    email = fields.Char('Email', required=True)
-    date_of_birth = fields.Date("Date of Birth")
-    mobile_number = fields.Char("Mobile no.")
-    gov_identity = fields.Char("Gov. ID Number")
-    gender = fields.Selection([("male", "Male"), ("female", "Female")])
+    patient_name = fields.Char('Name', required=True, tracking=True)
+    email = fields.Char('Email', required=True, tracking=True)
+    date_of_birth = fields.Date("Date of Birth", tracking=True)
+    mobile_number = fields.Char("Mobile no.", tracking=True)
+    gov_identity = fields.Char("Gov. ID Number", tracking=True)
+    gender = fields.Selection([("male", "Male"), ("female", "Female")], tracking=True)
     patient_age = fields.Char("Age", compute="_compute_age", store=True)
     image = fields.Binary()
     state = fields.Selection(
-        [("activate", "Activate"), ("inactivate", "Inactive")],
-        default="activate",
+        [("active", "Active"), ("inactive", "Inactive")],
+        default="active",
+        tracking=True
     )
     cancle_uid = fields.Many2one('res.users', 'Current User', default=lambda self: self.env.user, readonly=True)
     cancellation_date = fields.Date('Date', required=True, readonly=True, default=lambda *a: date.today())
@@ -72,6 +74,14 @@ class hospital_patient(models.Model):
                     rec.patient_age = f"{age.days} Days"
             else:
                 rec.patient_age = "0"
+
+    def action_activate(self):
+        for rec in self:
+            rec.state = "active"
+
+    def action_inactivate(self):
+        for rec in self:
+            rec.state = "inactive"
 
     def action_send_mail(self):
         template = self.env.ref('Hospital1.email_template')

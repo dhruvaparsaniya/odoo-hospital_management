@@ -27,6 +27,7 @@
     ],
     "depends": [
         "sale",
-        "web"
+        "web",
+        "mail"
     ],
 }
