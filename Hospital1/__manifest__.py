@@ -9,6 +9,8 @@
         "report/treatment_report_template.xml",
         "report/report.xml",
 
+        "data/ir_action_data.xml",
+        "data/ir_cron_data.xml",
         "data/email_template.xml",
         "data/sequence_hospital.xml",
 

@@ -6,11 +6,9 @@
                 <t t-call="web.basic_layout">
                     <div class="page" style="padding: 20px;">
                         <div class="oe_structure"/>
-
                         <h2 style="text-align: center; margin-bottom: 20px;">Treatment Id:
                             <t t-esc="o['treatment_id']"/>
                         </h2>
-
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
                                 <table style="width: 100%; border-collapse: collapse;">

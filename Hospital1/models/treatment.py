@@ -83,3 +83,16 @@ class hospital_treatment(models.Model):
 
     def action_print_custom_report(self):
         return self.env.ref("Hospital1.action_report_treatment").report_action(self)
+
+    def action_confirm(self):
+        for rec in self:
+            rec.state = "done"
+
+    @api.model
+    def action_cron_test_method(self):
+        today = fields.Date.today()
+        treatment = self.env['hospital.treatment'].search([('treatment_date', '=', today)])
+        for treat in treatment:
+            template = self.env.ref('Hospital1.remainder_email_template')
+            template.send_mail(self.id, force_send=True)
+            print("mail send successfully")

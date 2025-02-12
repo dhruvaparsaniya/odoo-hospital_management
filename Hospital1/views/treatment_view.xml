@@ -19,6 +19,7 @@
 
                     <button name="action_open_product_wizard" type="object" string="View Products" class="btn-primary"
                             invisible="state not in ['activate']"/>
+
                     <button string="Print Report" class="oe_stat_button" type="object"
                             name="action_print_custom_report" icon="fa-calendar"/>
                 </header>
@@ -58,6 +59,11 @@
                 <field name="patient_id"/>
                 <field name="treatment_date"/>
                 <field name="diagnosis"/>
+                <field name="state" decoration-success="state == 'done'"
+                       decoration-danger="state == 'cancel'"
+                       decoration-info="state == 'confirm'"
+                       decoration-muted="state == 'draft' "
+                       widget="badge"/>
             </tree>
         </field>
     </record>

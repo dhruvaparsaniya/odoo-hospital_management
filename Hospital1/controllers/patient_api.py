@@ -134,7 +134,7 @@ def update_user_data(user_id, name, email, gender, mobile_no, user_type, physici
         if validated_data == True:
             if user_type == "patient":
                 user = request.env['hospital.patient'].sudo().browse(user_id)
-                if user:
+                if user.exists():
                     user.sudo().write({
                         "patient_name": name,
                         "email": email,

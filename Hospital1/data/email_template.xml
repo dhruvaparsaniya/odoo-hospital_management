@@ -28,7 +28,7 @@
             <field name="name">Confirm Template</field>
             <field name="model_id" ref="Hospital1.model_hospital_treatment"/>
             <field name="subject">Treatment Confirmation Information</field>
-            <field name="email_from">dhruva281@gmail.com</field>
+            <field name="email_from">odoobot@example.com</field>
             <field name="email_to">{{ object.patient_id.email }}</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
@@ -72,7 +72,7 @@
             <field name="name">Done Template</field>
             <field name="model_id" ref="Hospital1.model_hospital_treatment"/>
             <field name="subject">Treatment Successfully Completed</field>
-            <field name="email_from">dhruva281@gmail.com</field>
+            <field name="email_from">odoobot@example.com</field>
             <field name="email_to">{{ object.patient_id.email }}</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
@@ -97,7 +97,7 @@
             <field name="name">Cancle Template</field>
             <field name="model_id" ref="Hospital1.model_hospital_treatment"/>
             <field name="subject">Treatment Cancellation</field>
-            <field name="email_from">dhruva281@gmail.com</field>
+            <field name="email_from">odoobot@example.com</field>
             <field name="email_to">{{ object.patient_id.email }}</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
@@ -120,5 +120,44 @@
             </field>
         </record>
 
+        <record id="remainder_email_template" model="mail.template">
+            <field name="name">Remainder Template</field>
+            <field name="model_id" ref="Hospital1.model_hospital_treatment"/>
+            <field name="subject">Reminder: Your Treatment Appointment is Today</field>
+            <field name="email_from">odoobot@example.com</field>
+            <field name="email_to">{{ object.patient_id.email }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear<t t-out="object.patient_id.patient_name"/>,
+                        <br/>
+                        <br/>
+                        This is a friendly reminder that your treatment appointment is scheduled for today,
+                        <t t-esc="object.treatment_date"/>
+                        <br/>
+                        <br/>
+                        <strong>Treatment Details:</strong>
+                        <br/>
+                        <ul>
+                            <li>
+                                <strong>Patient Name:</strong>
+                                <t t-out="object.patient_id.patient_name"/>
+                            </li>
+                            <li>
+                                <strong>Physician:</strong>
+                                <t t-out="object.physician_id.physician_name"/>
+                            </li>
+                        </ul>
+                        <br/>
+                        We look forward to seeing you soon.
+                        <br/>
+                        <br/>
+                        Best regards,
+                        <br/>
+                        Mitchell Admin
+                    </p>
+                </div>
+            </field>
+        </record>
     </data>
 </odoo>

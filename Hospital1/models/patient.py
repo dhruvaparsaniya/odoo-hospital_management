@@ -27,6 +27,7 @@ class hospital_patient(models.Model):
         default="active",
         tracking=True
     )
+    treatment_count = fields.Integer(string="Treatment", compute='compute_treatment_count', default=0)
     cancle_uid = fields.Many2one('res.users', 'Current User', default=lambda self: self.env.user, readonly=True)
     cancellation_date = fields.Date('Date', required=True, readonly=True, default=lambda *a: date.today())
 
@@ -107,11 +108,7 @@ class hospital_patient(models.Model):
             'context': "{'create': False}"
         }
 
-class ResPartner(models.Model):
-    _inherit = "res.partner"
-    treatment_count = fields.Integer(string="Treatment", compute='compute_treatment_count', default=0)
-    
     def compute_treatment_count(self):
         for record in self:
             record.treatment_count = self.env['hospital.treatment'].search_count(
-                [('patient_id', '=', self.name)])
+                [('patient_id', '=', self.patient_name)])
