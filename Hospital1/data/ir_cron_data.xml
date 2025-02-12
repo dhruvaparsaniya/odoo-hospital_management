@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_action_to_do" model="ir.cron">
+            <field name="name">Treatment remainder Schedule Action</field>
+            <field name="model_id" ref="Hospital1.model_hospital_treatment"/>
+            <field name="state">code</field>
+            <field name="code">model.action_cron_test_method()
+            </field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+    </data>
+</odoo>

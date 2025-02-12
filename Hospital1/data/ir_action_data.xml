@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="copy_phone_to_mobile" model="ir.actions.server">
+            <field name="name">Mark as confirm</field>
+            <field name="model_id" ref="Hospital1.model_hospital_treatment"/>
+            <field name="binding_model_id" ref="Hospital1.model_hospital_treatment"/>
+            <field name="binding_view_types">tree</field>
+            <field name="state">code</field>
+            <field name="code">
+                for record in records:
+                if record.state == "draft":
+                record.action_confirm()
+            </field>
+        </record>
+    </data>
+</odoo>
