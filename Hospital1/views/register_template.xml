@@ -66,7 +66,7 @@
 
     <record id="menu_create_patient" model="website.menu">
         <field name="name">Create Patient</field>
-        <field name="url">/patient_webform</field>
+        <field name="url">/patient_register</field>
         <field name="parent_id" ref="website.main_menu"/>
     </record>
 
